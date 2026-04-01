@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Colour Analysis – Image Consultation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="gradient-mesh">
+  <!-- SECTION: App Shell -->
+  <div class="app-shell grain">
+    <!-- SECTION: Header -->
+    <header class="app-header">
+      <div class="brand-mark">AuraTone</div>
+      <div class="accent-line" aria-hidden="true"></div>
+      <h1>AI Colour Analysis</h1>
+      <p class="subtitle">
+        Upload or take a photo and discover your seasonal colour palette – shades that
+        harmonise with your natural colouring, and tones to gently avoid.
+      </p>
+    </header>
+
+    <!-- SECTION: Layout -->
+    <main class="layout">
+      <!-- SECTION: Capture Panel -->
+      <section class="panel panel-input" aria-label="Photo input and instructions">
+        <h2>1. Capture your photo</h2>
+        <p class="panel-description">For the most accurate analysis, follow these simple guidelines.</p>
+
+        <ul class="guidelines" aria-label="Photo guidelines">
+          <li>Hair fully off your face – tie it back or tuck it behind your ears.</li>
+          <li>Stand in soft, natural daylight – avoid strong shadows or coloured lights.</li>
+          <li>Face the light, with your whole face clearly visible.</li>
+          <li>Remove heavy makeup, tinted glasses, or filters if possible.</li>
+        </ul>
+
+        <div class="input-actions">
+          <div class="upload-group">
+            <label for="photo-input" class="button button-primary">
+              <span>Upload a photo</span>
+            </label>
+            <input id="photo-input" type="file" accept="image/*" class="visually-hidden" />
+            <p class="hint">JPEG or PNG, clear view of your face.</p>
+          </div>
+
+          <div class="divider">
+            <span>or</span>
+          </div>
+
+          <button id="open-camera" class="button button-secondary" type="button">
+            Use your camera
+          </button>
+        </div>
+
+        <!-- Camera preview modal -->
+        <section id="camera-modal" class="camera-modal" aria-hidden="true" aria-label="Live camera capture">
+          <div class="camera-modal-inner shadow-soft">
+            <div class="camera-header">
+              <h3>Take a quick photo</h3>
+              <button id="close-camera" class="icon-button" type="button" aria-label="Close camera">×</button>
+            </div>
+            <p class="camera-tip">Position your face in the frame, in front of a window with soft daylight.</p>
+            <div class="camera-frame">
+              <video id="camera-video" autoplay playsinline></video>
+              <div class="face-guide" aria-hidden="true"></div>
+            </div>
+            <div class="camera-actions">
+              <button id="capture-photo" class="button button-primary" type="button">Capture photo</button>
+              <button id="stop-camera" class="button button-ghost" type="button">Stop camera</button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- SECTION: Preview & Results -->
+      <section class="panel panel-results" aria-label="Image preview and analysis results">
+        <h2>2. Your analysis</h2>
+        <p class="panel-description">Your photo appears below once selected. Then run the AI analysis.</p>
+
+        <div class="preview-wrapper shadow-soft">
+          <div class="preview-image-shell">
+            <img id="photo-preview" alt="Your selected portrait for colour analysis" />
+            <div id="preview-placeholder" class="preview-placeholder">
+              <p>No photo yet</p>
+              <p class="placeholder-sub">Upload or capture a photo to begin.</p>
+            </div>
+          </div>
+          <button id="analyze-button" class="button button-accent" type="button" disabled>
+            Analyse my colours
+          </button>
+          <div id="analysis-status" class="analysis-status" role="status" aria-live="polite"></div>
+        </div>
+
+        <section id="results" class="results" aria-label="Seasonal colour analysis" hidden>
+          <header class="results-header">
+            <p class="results-label">Your season</p>
+            <p id="season-name" class="season-name"></p>
+            <p id="season-tagline" class="season-tagline"></p>
+          </header>
+
+          <div class="results-grid">
+            <article class="results-card" aria-label="Colours that suit you">
+              <h3>Colours to wear</h3>
+              <p class="results-note">These tones harmonise with your natural colouring.</p>
+              <div id="wear-swatches" class="swatch-grid" aria-live="polite"></div>
+            </article>
+
+            <article class="results-card" aria-label="Colours to avoid">
+              <h3>Colours to avoid</h3>
+              <p class="results-note">These may overpower or dull your natural features.</p>
+              <div id="avoid-swatches" class="swatch-grid" aria-live="polite"></div>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <!-- SECTION: Footer -->
+    <footer class="app-footer">
+      <p class="footer-text">This demo uses a simulated AI model for educational purposes only.</p>
+    </footer>
+  </div>
+
+  <canvas id="analysis-canvas" class="visually-hidden" aria-hidden="true"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>
